@@ -33,7 +33,16 @@ if (!isset($arg["text"]) || !is_string($arg["text"])) {
 }
 
 
+require __DIR__."/../src/GoogleTranslate/src/GoogleTranslate.php";
+
+$st = new GoogleTranslate\GoogleTranslate($arg["text"], $arg["fr"], $arg["to"]);
+
 $code = 200;
+$msg = [
+	"error" => NULL,
+	"result" => $st->exec()
+];
+
 
 out:
 header("Content-Type: application/json");
