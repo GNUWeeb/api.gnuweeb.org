@@ -35,14 +35,19 @@ if (!isset($arg["text"]) || !is_string($arg["text"])) {
 
 require __DIR__."/../src/GoogleTranslate/src/GoogleTranslate.php";
 
-$st = new GoogleTranslate\GoogleTranslate($arg["text"], $arg["fr"], $arg["to"]);
+try {
 
-$code = 200;
-$msg = [
-	"error" => NULL,
-	"result" => $st->exec()
-];
-
+	$st = new \GoogleTranslate\GoogleTranslate($arg["text"], $arg["fr"],
+						   $arg["to"]);
+	$code = 200;
+	$msg = [
+		"error" => NULL,
+		"result" => $st->exec()
+	];
+} catch (\GoogleTranslate\GoogleTranslateException $e) {
+	$code = 400;
+	$msg = ["error" => $e->getMessage()];
+}
 
 out:
 header("Content-Type: application/json");
