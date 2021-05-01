@@ -1,0 +1,3 @@
+[submodule "src/GoogleTranslate"]
+	path = src/GoogleTranslate
+	url = https://github.com/ammarfaizi2/GoogleTranslate
